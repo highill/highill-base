@@ -11,7 +11,7 @@ public class CalendarTool {
 	/**
 	 * get day start time
 	 * 
-	 * @param date
+	 * @param date target date
 	 * @return day start Date
 	 */
 	public static Date dayStart(Date date) {
@@ -32,8 +32,8 @@ public class CalendarTool {
 
 	/**
 	 * format date with dateFormat
-	 * @param date
-	 * @param dateFormat
+	 * @param date target date
+	 * @param dateFormat target SimpleDateFormat string
 	 * @return date format string
 	 */
 	public static String format(Date date, String dateFormat) {
@@ -51,7 +51,7 @@ public class CalendarTool {
 	
 	/**
 	 * format date with {@value #DATE_TIME_FULL_FORMAT}
-	 * @param date
+	 * @param date target date
 	 * @return format string
 	 */
 	public static String formatDateTimeFull(Date date) {
@@ -61,8 +61,8 @@ public class CalendarTool {
 	
 	/**
 	 * parse a string to Date
-	 * @param date
-	 * @param dateFormat
+	 * @param date target date
+	 * @param dateFormat target SimpleDateFormat string
 	 * @return parse Date
 	 */
 	public static Date parse(String date, String dateFormat) {
@@ -81,8 +81,8 @@ public class CalendarTool {
 	
 	/**
 	 * parse {@value #DATE_TIME_FULL_FORMAT} to Date
-	 * @param date
-	 * @return parse Date
+	 * @param date target date
+	 * @return parse Date 
 	 */
 	public static Date parseDateTimeFull(String date) {
 		Date parseDate = parse(date, DATE_TIME_FULL_FORMAT);

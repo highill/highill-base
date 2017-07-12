@@ -6,7 +6,7 @@ public class HashTool {
 	
 	/**
 	 * MD5 of a string
-	 * @param param
+	 * @param param target string
 	 * @return md5 string
 	 */
 	public static String md5(String param) {
@@ -16,7 +16,7 @@ public class HashTool {
 	
 	/**
 	 * SHA256 of a string
-	 * @param param
+	 * @param param target string
 	 * @return sha256 string 
 	 */
 	public static String sha256(String param) {
@@ -26,7 +26,7 @@ public class HashTool {
 	
 	/**
 	 * SHA512 of a string
-	 * @param param
+	 * @param param target string
 	 * @return sha512 string 
 	 */
 	public static String sha512(String param) {
