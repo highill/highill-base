@@ -9,9 +9,54 @@ public class CalendarTool {
 	public static final String DATE_TIME_FULL_FORMAT = "yyyy-MM-dd HH:mm:ss.SSS";
 
 	/**
+	 * date add day number
+	 * 
+	 * @param date
+	 *            target date
+	 * @param dayNumber
+	 *            day number
+	 * @return target date add day number Date
+	 */
+	public static Date dayAdd(Date date, int dayNumber) {
+		Date dayAdd = null;
+		if (date != null) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+
+			calendar.add(Calendar.DAY_OF_YEAR, dayNumber);
+
+			dayAdd = calendar.getTime();
+		}
+		return dayAdd;
+	}
+
+	/**
+	 * day end time
+	 * 
+	 * @param date
+	 *            target day
+	 * @return day end Date
+	 */
+	public static Date dayEnd(Date date) {
+		Date dayEnd = null;
+		if (date != null) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+
+			calendar.set(Calendar.HOUR_OF_DAY, 23);
+			calendar.set(Calendar.MINUTE, 59);
+			calendar.set(Calendar.SECOND, 59);
+			calendar.set(Calendar.MILLISECOND, 999);
+			dayEnd = calendar.getTime();
+		}
+		return dayEnd;
+	}
+
+	/**
 	 * get day start time
 	 * 
-	 * @param date target date
+	 * @param date
+	 *            target date
 	 * @return day start Date
 	 */
 	public static Date dayStart(Date date) {
@@ -31,9 +76,125 @@ public class CalendarTool {
 	}
 
 	/**
+	 * date add month number
+	 * 
+	 * @param date
+	 *            target date
+	 * @param monthNumber
+	 *            month number
+	 * @return target date add month Date
+	 */
+	public static Date monthAdd(Date date, int monthNumber) {
+		Date monthAdd = null;
+		if (date != null) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+
+			calendar.add(Calendar.MONTH, monthNumber);
+
+			monthAdd = calendar.getTime();
+		}
+		return monthAdd;
+	}
+
+	/**
+	 * month end Date
+	 * 
+	 * @param date
+	 *            target date
+	 * @return month end Date
+	 */
+	public static Date monthEnd(Date date) {
+		Date monthEnd = null;
+		if (date != null) {
+			Date nextMonthStart = nextMonthStart(date);
+			Date monthLastDay = dayAdd(nextMonthStart, -1);
+			monthEnd = dayEnd(monthLastDay);
+		}
+		return monthEnd;
+	}
+
+	/**
+	 * month start Date
+	 * 
+	 * @param date
+	 *            target date
+	 * @return month start Date
+	 */
+	public static Date monthStart(Date date) {
+		Date monthStart = null;
+		if (date != null) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+
+			calendar.set(Calendar.DAY_OF_MONTH, 1);
+			calendar.set(Calendar.HOUR_OF_DAY, 0);
+			calendar.set(Calendar.MINUTE, 0);
+			calendar.set(Calendar.SECOND, 0);
+			calendar.set(Calendar.MILLISECOND, 0);
+
+			monthStart = calendar.getTime();
+		}
+		return monthStart;
+	}
+
+	/**
+	 * date add one day
+	 * 
+	 * @param date
+	 *            target date
+	 * @return date add one day
+	 */
+	public static Date nextDay(Date date) {
+		Date nextDay = dayAdd(date, 1);
+		return nextDay;
+	}
+
+	/**
+	 * next day start Date
+	 * 
+	 * @param date
+	 *            target date
+	 * @return next day start Date
+	 */
+	public static Date nextDayStart(Date date) {
+		Date nextDay = nextDay(date);
+		Date nextDayStart = dayStart(nextDay);
+		return nextDayStart;
+	}
+
+	/**
+	 * next month Date
+	 * 
+	 * @param date
+	 *            target date
+	 * @return next month Date
+	 */
+	public static Date nextMonth(Date date) {
+		Date nextMonth = monthAdd(date, 1);
+		return nextMonth;
+	}
+
+	/**
+	 * next month start Date
+	 * 
+	 * @param date
+	 *            target date
+	 * @return next month start Date
+	 */
+	public static Date nextMonthStart(Date date) {
+		Date nextMonth = nextMonth(date);
+		Date nextMonthStart = monthStart(nextMonth);
+		return nextMonthStart;
+	}
+
+	/**
 	 * format date with dateFormat
-	 * @param date target date
-	 * @param dateFormat target SimpleDateFormat string
+	 * 
+	 * @param date
+	 *            target date
+	 * @param dateFormat
+	 *            target SimpleDateFormat string
 	 * @return date format string
 	 */
 	public static String format(Date date, String dateFormat) {
@@ -44,45 +205,52 @@ public class CalendarTool {
 				format = simpleFormat.format(date);
 			}
 		} catch (Exception e) {
-			
+			System.out.println(e);
 		}
 		return format;
 	}
-	
+
 	/**
 	 * format date with {@value #DATE_TIME_FULL_FORMAT}
-	 * @param date target date
+	 * 
+	 * @param date
+	 *            target date
 	 * @return format string
 	 */
 	public static String formatDateTimeFull(Date date) {
 		String format = format(date, DATE_TIME_FULL_FORMAT);
 		return format;
 	}
-	
+
 	/**
 	 * parse a string to Date
-	 * @param date target date
-	 * @param dateFormat target SimpleDateFormat string
+	 * 
+	 * @param date
+	 *            target date
+	 * @param dateFormat
+	 *            target SimpleDateFormat string
 	 * @return parse Date
 	 */
 	public static Date parse(String date, String dateFormat) {
 		Date parseDate = null;
 		try {
-			if(date != null && !date.trim().isEmpty() && dateFormat != null && !dateFormat.trim().isEmpty()) {
+			if (date != null && !date.trim().isEmpty() && dateFormat != null && !dateFormat.trim().isEmpty()) {
 				SimpleDateFormat simpleFormat = new SimpleDateFormat(dateFormat.trim());
 				parseDate = simpleFormat.parse(date);
 			}
-		} catch(Exception e) {
-			
+		} catch (Exception e) {
+			System.out.println(e);
 		}
-		
+
 		return parseDate;
 	}
-	
+
 	/**
 	 * parse {@value #DATE_TIME_FULL_FORMAT} to Date
-	 * @param date target date
-	 * @return parse Date 
+	 * 
+	 * @param date
+	 *            target date
+	 * @return parse Date
 	 */
 	public static Date parseDateTimeFull(String date) {
 		Date parseDate = parse(date, DATE_TIME_FULL_FORMAT);
