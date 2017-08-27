@@ -178,4 +178,85 @@ public class CalendarToolTest {
 		}
 	}
 
+	@Test
+	public void nextYear() {
+		Map<String, String> nextYearMap = new LinkedHashMap<String, String>();
+		nextYearMap.put("2017-07-01 11:22:33.123", "2018-07-01 11:22:33.123");
+		nextYearMap.put("2018-10-01 22:33:44.234", "2019-10-01 22:33:44.234");
+		nextYearMap.put("2020-12-31 23:59:59.999", "2021-12-31 23:59:59.999");
+
+		for (String dateTimeString : nextYearMap.keySet()) {
+			Date dateParam = CalendarTool.parseDateTimeFull(dateTimeString);
+			Date nextYear = CalendarTool.nextYear(dateParam);
+			String nextYearFormat = CalendarTool.formatDateTimeFull(nextYear);
+			System.out.println("----- nextYear dateTimeString: " + dateTimeString + "  nextYear is " + nextYearFormat);
+			TestCase.assertEquals(nextYearMap.get(dateTimeString), nextYearFormat);
+		}
+	}
+
+	@Test
+	public void nextYearStart() {
+		Map<String, String> nextYearStartMap = new LinkedHashMap<String, String>();
+		nextYearStartMap.put("2017-07-01 11:22:33.123", "2018-01-01 00:00:00.000");
+		nextYearStartMap.put("2018-10-01 22:33:44.234", "2019-01-01 00:00:00.000");
+		nextYearStartMap.put("2020-12-31 23:59:59.999", "2021-01-01 00:00:00.000");
+
+		for (String dateTimeString : nextYearStartMap.keySet()) {
+			Date dateParam = CalendarTool.parseDateTimeFull(dateTimeString);
+			Date nextYearStart = CalendarTool.nextYearStart(dateParam);
+			String nextYearStartFormat = CalendarTool.formatDateTimeFull(nextYearStart);
+			System.out.println("----- nextYearStart dateTimeString: " + dateTimeString + "  nextYearStart is " + nextYearStartFormat);
+			TestCase.assertEquals(nextYearStartMap.get(dateTimeString), nextYearStartFormat);
+		}
+	}
+
+	@Test
+	public void yearAdd() {
+		int yearNumber = 3;
+		Map<String, String> yearAddMap = new LinkedHashMap<String, String>();
+		yearAddMap.put("2001-07-01 11:22:33.123", "2004-07-01 11:22:33.123");
+		yearAddMap.put("2017-12-31 22:33:44.234", "2020-12-31 22:33:44.234");
+		yearAddMap.put("2010-10-10 23:59:59.255", "2013-10-10 23:59:59.255");
+
+		for (String dateTimeString : yearAddMap.keySet()) {
+			Date dateParam = CalendarTool.parseDateTimeFull(dateTimeString);
+			Date yearAdd = CalendarTool.yearAdd(dateParam, yearNumber);
+			String yearAddFormat = CalendarTool.formatDateTimeFull(yearAdd);
+			System.out.println("----- yearAdd dateTimeString: " + dateTimeString + "  yearAdd " + yearNumber + "  " + yearAddFormat);
+			TestCase.assertEquals(yearAddMap.get(dateTimeString), yearAddFormat);
+		}
+	}
+
+	@Test
+	public void yearStart() {
+		Map<String, String> yearStartMap = new LinkedHashMap<String, String>();
+		yearStartMap.put("2010-08-10 11:22:33.123", "2010-01-01 00:00:00.000");
+		yearStartMap.put("2017-12-31 22:33:44.234", "2017-01-01 00:00:00.000");
+		yearStartMap.put("2018-01-10 23:59:59.255", "2018-01-01 00:00:00.000");
+
+		for (String dateTimeString : yearStartMap.keySet()) {
+			Date dateParam = CalendarTool.parseDateTimeFull(dateTimeString);
+			Date yearStart = CalendarTool.yearStart(dateParam);
+			String yearStartFormat = CalendarTool.formatDateTimeFull(yearStart);
+			System.out.println("----- yearStart dateTimeString: " + dateTimeString + "  yearStart is " + yearStartFormat);
+			TestCase.assertEquals(yearStartMap.get(dateTimeString), yearStartFormat);
+		}
+	}
+
+	@Test
+	public void yearEnd() {
+		Map<String, String> yearEndMap = new LinkedHashMap<String, String>();
+		yearEndMap.put("2010-01-01 11:22:33.123", "2010-12-31 23:59:59.999");
+		yearEndMap.put("2017-10-10 22:33:44.234", "2017-12-31 23:59:59.999");
+		yearEndMap.put("2018-08-01 23:59:59.255", "2018-12-31 23:59:59.999");
+
+		for (String dateTimeString : yearEndMap.keySet()) {
+			Date dateParam = CalendarTool.parseDateTimeFull(dateTimeString);
+			Date yearEnd = CalendarTool.yearEnd(dateParam);
+			String yearEndFormat = CalendarTool.formatDateTimeFull(yearEnd);
+			System.out.println("----- yearEnd dateTimeString: " + dateTimeString + "  yearEnd is " + yearEndFormat);
+			TestCase.assertEquals(yearEndMap.get(dateTimeString), yearEndFormat);
+		}
+	}
+
 }

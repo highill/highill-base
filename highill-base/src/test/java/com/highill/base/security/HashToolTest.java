@@ -1,4 +1,4 @@
-package com.highill.base.calendar.security;
+package com.highill.base.security;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

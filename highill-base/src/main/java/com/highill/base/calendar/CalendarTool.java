@@ -189,6 +189,31 @@ public class CalendarTool {
 	}
 
 	/**
+	 * next year Date
+	 * 
+	 * @param date
+	 *            target Date
+	 * @return next year Date
+	 */
+	public static Date nextYear(Date date) {
+		Date nextYear = yearAdd(date, 1);
+		return nextYear;
+	}
+
+	/**
+	 * next year start Date
+	 * 
+	 * @param date
+	 *            target Date
+	 * @return next year start Date
+	 */
+	public static Date nextYearStart(Date date) {
+		Date nextYear = nextYear(date);
+		Date nextYearStart = yearStart(nextYear);
+		return nextYearStart;
+	}
+
+	/**
 	 * format date with dateFormat
 	 * 
 	 * @param date
@@ -255,6 +280,78 @@ public class CalendarTool {
 	public static Date parseDateTimeFull(String date) {
 		Date parseDate = parse(date, DATE_TIME_FULL_FORMAT);
 		return parseDate;
+	}
+
+	/**
+	 * date add year number
+	 * 
+	 * @param date
+	 *            target Date
+	 * @param yearNumber
+	 *            add year number
+	 * @return date add year number Date
+	 */
+	public static Date yearAdd(Date date, int yearNumber) {
+		Date yearAdd = null;
+		if (date != null) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+
+			calendar.add(Calendar.YEAR, yearNumber);
+
+			yearAdd = calendar.getTime();
+		}
+		return yearAdd;
+	}
+
+	/**
+	 * year end
+	 * 
+	 * @param date
+	 *            year end Date
+	 * @return year end Date
+	 */
+	public static Date yearEnd(Date date) {
+		Date yearEnd = null;
+		if (date != null) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+
+			calendar.set(Calendar.MONTH, Calendar.DECEMBER);
+			calendar.set(Calendar.DAY_OF_MONTH, 31);
+			calendar.set(Calendar.HOUR_OF_DAY, 23);
+			calendar.set(Calendar.MINUTE, 59);
+			calendar.set(Calendar.SECOND, 59);
+			calendar.set(Calendar.MILLISECOND, 999);
+
+			yearEnd = calendar.getTime();
+		}
+		return yearEnd;
+	}
+
+	/**
+	 * year start
+	 * 
+	 * @param date
+	 *            year start Date
+	 * @return year start Date
+	 */
+	public static Date yearStart(Date date) {
+		Date yearStart = null;
+		if (date != null) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+
+			calendar.set(Calendar.MONTH, Calendar.JANUARY);
+			calendar.set(Calendar.DAY_OF_YEAR, 1);
+			calendar.set(Calendar.HOUR_OF_DAY, 0);
+			calendar.set(Calendar.MINUTE, 0);
+			calendar.set(Calendar.SECOND, 0);
+			calendar.set(Calendar.MILLISECOND, 0);
+
+			yearStart = calendar.getTime();
+		}
+		return yearStart;
 	}
 
 }
